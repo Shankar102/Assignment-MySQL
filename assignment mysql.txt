@@ -1,0 +1,95 @@
+
+mysql> use food_adda;
+Database changed
+mysql> select * from salespeople;
++------+----------+-----------+------+
+| snum | sname    | city      | comm |
++------+----------+-----------+------+
+| 1001 | peel     | london    |   12 |
+| 1002 | serres   | sanjose   |   13 |
+| 1003 | axelrod  | newyork   |   10 |
+| 1004 | motika   | london    |   11 |
+| 1007 | rifkin   | barcelona |   15 |
+| 2002 | goivanni | rome      | 1003 |
+| 2007 | pereire  | rome      | 1004 |
++------+----------+-----------+------+
+7 rows in set (0.00 sec)
+
+mysql> select * from customers;
++------+----------+---------+------+
+| cnum | cname    | city    | snum |
++------+----------+---------+------+
+| 2001 | hoffman  | london  | 1001 |
+| 2002 | goivanni | rome    | 1003 |
+| 2003 | liu      | sanjose | 1002 |
+| 2004 | grass    | berlin  | 1002 |
+| 2006 | clemens  | london  | 1001 |
+| 2007 | pereire  | rome    | 1004 |
+| 2008 | cisneros | sanjose | 1007 |
++------+----------+---------+------+
+7 rows in set (0.00 sec)
+
+mysql> select * from orders;
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4273.00 | 1990-10-05 | 2006 | 1001 |
+| 3009 | 1713.24 | 1990-10-04 | 2002 | 1003 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.00 sec)
+
+mysql> select * from salespeople where sname like 'a%';
++------+---------+---------+------+
+| snum | sname   | city    | comm |
++------+---------+---------+------+
+| 1003 | axelrod | newyork |   10 |
++------+---------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from orders where amt > 2000 ;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select city, count(*) as total from salespeople where city = 'newyork';
++---------+-------+
+| city    | total |
++---------+-------+
+| newyork |     1 |
++---------+-------+
+1 row in set (0.00 sec)
+
+mysql> select city, count(*) as total from salespeople where city = 'london';
++--------+-------+
+| city   | total |
++--------+-------+
+| london |     2 |
++--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select city, count(*) as total from salespeople where city = 'paris';
++------+-------+
+| city | total |
++------+-------+
+| NULL |     0 |
++------+-------+
+1 row in set (0.00 sec)
+
+mysql> select  count(onum) from orders;
++-------------+
+| count(onum) |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.00 sec)
